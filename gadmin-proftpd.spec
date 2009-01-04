@@ -1,9 +1,13 @@
+# if I fix the string literal errors according to the wiki Problems
+# page, it crashes on startup - AdamW 2009/01
+%define Werror_cflags %nil
+
 Summary:	GNOME GUI Tool for Proftpd Server Configuration
 Name:		gadmin-proftpd
-Version:	0.3.0
+Version:	0.3.5
 Release:	%mkrel 1
 Group:		System/Configuration/Networking
-License:	GPL
+License:	GPLv3+
 URL:		http://www.gadmintools.org/
 Source0:	http://mange.dynup.net/linux/%{name}/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
@@ -16,11 +20,10 @@ Provides:	gproftpd
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-GProftpd is a fast and easy to use GNOME2 administration tool for
-the Proftpd standalone server.
+Gadmin-proftpd is a fast and easy to use GTK+-based administration tool
+for the Proftpd FTP server.
 
 %prep
-
 %setup -q
 
 %build
@@ -33,32 +36,37 @@ the Proftpd standalone server.
 %install
 rm -rf %{buildroot}
 %makeinstall
-rm -fr $RPM_BUILD_ROOT/%_docdir
+rm -fr %{buildroot}/%{_docdir}
 
 install -d %{buildroot}%{_sysconfdir}/pam.d/
 install -m0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/%{name}
 
 # locales
-%find_lang %name
+%find_lang %{name}
 
-# Mandriva Icons
-install -D -m644 pixmaps/%{name}32.png %{buildroot}%{_iconsdir}/%{name}.png
-install -D -m644 pixmaps/%{name}16.png %{buildroot}%{_miconsdir}/%{name}.png
-install -D -m644 pixmaps/%{name}48.png %{buildroot}%{_liconsdir}/%{name}.png
+# Icons
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+install -D -m644 pixmaps/%{name}32.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+install -D -m644 pixmaps/%{name}16.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -D -m644 pixmaps/%{name}48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 # Menu
 mkdir -p %{buildroot}%{_datadir}/applications
+sed -i -e 's,%{name}.png,%{name},g' desktop/%{name}.desktop
+sed -i -e 's,GADMIN-PROFTPD,Gadmin-Proftpd,g' desktop/%{name}.desktop
+
 mv desktop/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
-perl -pi -e 's,%{name}.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 desktop-file-install --vendor="" \
     --remove-category="Application" \
     --add-category="Settings;Network;GTK;" \
+    --remove-key="Encoding" \
     --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 
 # Prepare usermode entry
+mkdir -p %{buildroot}%{_bindir}
 mv %{buildroot}%{_sbindir}/%{name} %{buildroot}%{_sbindir}/%{name}.real
-ln -s %{_bindir}/consolehelper %{buildroot}%{_sbindir}/%{name}
+ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{name}
 
 mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps
 cat > %{buildroot}%{_sysconfdir}/security/console.apps/%{name} <<_EOF_
@@ -81,18 +89,16 @@ _EOF_
 %clean
 rm -rf %{buildroot}
 
-%files -f %name.lang
+%files -f %{name}.lang
 %defattr(-,root,root,0755)
 %doc AUTHORS ChangeLog README
 %config(noreplace) %{_sysconfdir}/pam.d/%{name}
 %config(noreplace) %{_sysconfdir}/security/console.apps/%{name}
-%{_sbindir}/%{name}
+%{_bindir}/%{name}
 %{_sbindir}/%{name}.real
 %{_sbindir}/gprostats
 %{_datadir}/pixmaps/*
-%{_iconsdir}/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/*
 %defattr(0600,root,root,0700)
 %config(noreplace) %{_sysconfdir}/%{name}
