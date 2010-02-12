@@ -4,7 +4,7 @@
 
 Summary:	GNOME GUI Tool for Proftpd Server Configuration
 Name:		gadmin-proftpd
-Version:	0.3.8
+Version:	0.3.9
 Release:	%mkrel 1
 Group:		System/Configuration/Networking
 License:	GPLv3+
@@ -35,7 +35,7 @@ for the Proftpd FTP server.
 
 %install
 rm -rf %{buildroot}
-%makeinstall
+%makeinstall_std
 rm -fr %{buildroot}/%{_docdir}
 
 install -d %{buildroot}%{_sysconfdir}/pam.d/
