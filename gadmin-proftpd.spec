@@ -4,12 +4,12 @@
 
 Summary:	GNOME GUI Tool for Proftpd Server Configuration
 Name:		gadmin-proftpd
-Version:	0.3.9
+Version:	0.4.0
 Release:	%mkrel 1
 Group:		System/Configuration/Networking
 License:	GPLv3+
 URL:		http://www.gadmintools.org/
-Source0:	http://mange.dynup.net/linux/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://mange.dynalias.org/linux/gadmin-proftpd/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
 Requires:	proftpd >= 1.2.8
 Requires:	usermode-consoleonly
