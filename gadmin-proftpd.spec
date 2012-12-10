@@ -104,3 +104,52 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}
 
 
+
+
+%changelog
+* Sun May 22 2011 Funda Wang <fwang@mandriva.org> 0.4.2-1mdv2011.0
++ Revision: 677005
+- update to new version 0.4.2
+
+* Thu Jan 20 2011 Funda Wang <fwang@mandriva.org> 0.4.1-1
++ Revision: 631775
+- update to new version 0.4.1
+
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 0.4.0-2mdv2011.0
++ Revision: 610788
+- rebuild
+
+* Fri Mar 19 2010 Funda Wang <fwang@mandriva.org> 0.4.0-1mdv2010.1
++ Revision: 525189
+- new version 0.4.0
+
+* Fri Feb 12 2010 Funda Wang <fwang@mandriva.org> 0.3.9-1mdv2010.1
++ Revision: 504476
+- New version 0.3.9
+
+* Fri Sep 11 2009 Emmanuel Andry <eandry@mandriva.org> 0.3.8-1mdv2010.0
++ Revision: 438458
+- New version 0.3.8
+
+* Fri Sep 11 2009 Thierry Vignaud <tv@mandriva.org> 0.3.5-2mdv2010.0
++ Revision: 437642
+- rebuild
+
+* Sun Jan 04 2009 Adam Williamson <awilliamson@mandriva.org> 0.3.5-1mdv2009.1
++ Revision: 324084
+- put the consolehelper link in bindir, not sbindir - there's no point having
+  it in sbindir as it's not in a user's path (this broke the menu entry)
+- don't have encoding key in the menu entry
+- don't have the name IN CAPITALS in menu entry
+- fd.o icons
+- clean macro use
+- fix description a bit
+- new license policy
+- disable Werror as I can't fix the string errors without it crashing on start
+- new release 0.3.5
+
+* Tue Sep 09 2008 Emmanuel Andry <eandry@mandriva.org> 0.3.0-1mdv2009.0
++ Revision: 283093
+- import gadmin-proftpd
+
+
