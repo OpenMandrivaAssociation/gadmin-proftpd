@@ -5,7 +5,7 @@
 Summary:	GNOME GUI Tool for Proftpd Server Configuration
 Name:		gadmin-proftpd
 Version:	0.4.2
-Release:	%mkrel 1
+Release:	2
 Group:		System/Configuration/Networking
 License:	GPLv3+
 URL:		http://www.gadmintools.org/
