@@ -8,7 +8,7 @@ Version:	0.4.2
 Release:	2
 Group:		System/Configuration/Networking
 License:	GPLv3+
-URL:		http://www.gadmintools.org/
+URL:		https://www.gadmintools.org/
 Source0:	http://mange.dynalias.org/linux/gadmin-proftpd/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
 Requires:	proftpd >= 1.2.8
